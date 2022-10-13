@@ -7,6 +7,26 @@ namespace Xcurse
         m_size = Size{1, 1, true};
     }
 
+    FontAdaptor::FontAdaptor(const FontAdaptor &that) : m_fontlib(that.m_fontlib)
+    {
+        m_text = that.m_text;
+        m_text_size = that.m_text_size;
+        m_display_ptr = nullptr;
+    }
+
+    FontAdaptor &FontAdaptor::operator=(FontAdaptor &that)
+    {
+        if (this != &that)
+        {
+            m_fontlib = that.m_fontlib;
+            m_text = that.m_text;
+            m_text_size = that.m_text_size;
+            m_display_ptr = that.m_display_ptr;
+            that.m_display_ptr = nullptr;
+        }
+        return *this;
+    }
+
     void FontAdaptor::set_text(std::string &t)
     {
         m_text = t;

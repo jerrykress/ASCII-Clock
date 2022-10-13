@@ -8,6 +8,8 @@ namespace Xcurse
     {
     public:
         FontAdaptor(FontLibData &font);
+        FontAdaptor(const FontAdaptor &that);
+        FontAdaptor &operator=(FontAdaptor &that);
 
         void set_fontlib(FontLibData &f);
         void set_text(std::string &t);
@@ -21,6 +23,8 @@ namespace Xcurse
         std::string m_text;
         Size m_text_size;
         int m_padding, m_inner_gap;
+
+        friend class ClockContainer;
     };
 
 }
