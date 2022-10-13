@@ -15,7 +15,6 @@ file(GLOB src_files CONFIGURE_DEPENDS
      "Xcurse/src/Window/*.cpp"
      "Xcurse/src/Shapes/*.cpp"
      "src/*.cpp"
-     "src/*.h"
 )
 
 add_executable(Clock clock.cpp ${src_files})
