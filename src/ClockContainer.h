@@ -11,6 +11,7 @@ namespace Xcurse
     public:
         ClockContainer(const FontAdaptor &adaptor, const ClockBackground &background);
 
+        void set_text(const std::string &s);
         void set_progress(int i);
 
     private:

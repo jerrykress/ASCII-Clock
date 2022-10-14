@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../Xcurse/src/Display/Display.h"
+#include "../Xcurse/src/Utils/Converter.h"
 #include "FontLib.h"
 #include <numeric>
 
@@ -24,7 +25,8 @@ namespace Xcurse
         FontLibData &m_fontlib;
         std::string m_text;
         Size m_text_size;
-        int m_padding, m_inner_gap;
+        int m_padding;
+        int m_inner_gap;
 
         friend class ClockContainer;
     };

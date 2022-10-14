@@ -21,10 +21,11 @@ int main()
 
     d.power_on();
 
-    while (d.has_power())
+    while (d.has_power() && progress > 0)
     {
-        container->set_progress(progress -= 10);
+        container->set_text(std::to_string(progress));
         std::this_thread::sleep_for(1s);
+        container->set_progress(progress -= 10);
     }
 
     d.power_off();

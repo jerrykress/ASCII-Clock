@@ -39,6 +39,10 @@ namespace Xcurse
 
     void ClockBackground::draw()
     {
+        // maximise self to fill parent
+        m_loc = parent_ptr->get_loc();
+        m_size = parent_ptr->get_size();
+
         const int start_y = m_size.height * (100 - m_percentage) / 100;
 
         for (int y = 0; y < m_size.height; y++)
