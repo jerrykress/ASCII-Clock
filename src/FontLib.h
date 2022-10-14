@@ -6,7 +6,7 @@
 
 typedef std::unordered_map<char, std::vector<std::string>> FontLibData;
 
-const FontLibData digit_bold = {
+static FontLibData digit_bold = {
 
     {'0',
      {"  /$$$$$$ ",

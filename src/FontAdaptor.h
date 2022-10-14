@@ -1,3 +1,5 @@
+#pragma once
+
 #include "../Xcurse/src/Display/Display.h"
 #include "FontLib.h"
 #include <numeric>
@@ -12,7 +14,7 @@ namespace Xcurse
         FontAdaptor &operator=(FontAdaptor &that);
 
         void set_fontlib(FontLibData &f);
-        void set_text(std::string &t);
+        void set_text(const std::string &t);
         void set_padding(int i);
         void set_gap(int i);
 

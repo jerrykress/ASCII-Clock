@@ -1,3 +1,5 @@
+#pragma once
+
 #include "../Xcurse/src/Display/Display.h"
 #include "ClockBackground.h"
 #include "FontAdaptor.h"
@@ -8,6 +10,8 @@ namespace Xcurse
     {
     public:
         ClockContainer(const FontAdaptor &adaptor, const ClockBackground &background);
+
+        void set_progress(int i);
 
     private:
         void draw() override;

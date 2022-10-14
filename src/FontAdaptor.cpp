@@ -27,7 +27,7 @@ namespace Xcurse
         return *this;
     }
 
-    void FontAdaptor::set_text(std::string &t)
+    void FontAdaptor::set_text(const std::string &t)
     {
         m_text = t;
         m_text_size.height = std::accumulate(t.begin(), t.end(), 0, [this](int a, char c)
@@ -58,7 +58,7 @@ namespace Xcurse
 
             for (int i = 0; i < m_text.size(); i++)
             {
-                m_display_ptr->set_pixel(this, x++, y, Pixel(m_text[i]));
+                // TODO:
                 x += m_inner_gap;
             }
         }
