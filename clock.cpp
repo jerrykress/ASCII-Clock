@@ -1,4 +1,5 @@
 #include "src/ClockContainer.h"
+#include "src/TimerDaemon.h"
 #include "src/FontLib.h"
 
 using namespace Xcurse;
@@ -15,20 +16,24 @@ int main()
     d.set_refresh_interval(200);
 
     ClockContainer *container = new ClockContainer(FontAdaptor(digit_bold), ClockBackground());
-    int progress = 100;
+    TimerDaemon *daemon = new TimerDaemon();
+    daemon->attach(container);
 
     d.add_obj("root", "clock", container);
 
     d.power_on();
+    daemon->set_timer(15);
+    daemon->start();
+    daemon->start_timer();
 
-    while (d.has_power() && progress > 0)
+    while (d.has_power() && daemon->running())
     {
-        container->set_text(std::to_string(progress));
+        // TODO: dummy work, fix later
         std::this_thread::sleep_for(1s);
-        container->set_progress(progress--);
     }
 
     d.power_off();
 
+    std::cout << "Timer has ended!\n";
     return 0;
 }

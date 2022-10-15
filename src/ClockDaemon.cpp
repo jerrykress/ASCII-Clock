@@ -51,8 +51,10 @@ namespace Xcurse
 
     void ClockDaemon::start()
     {
-        // std::future f = std::async(m_daemon_process);
+        // turn daemon status to on
         m_status = true;
+        // launch daemon thread on future
+        m_daemon_future = std::async(std::launch::async, &ClockDaemon::m_daemon_process, this);
     }
 
     bool ClockDaemon::running() const
@@ -62,12 +64,20 @@ namespace Xcurse
 
     void ClockDaemon::stop()
     {
+        // wait for daemon thread to return
+        m_daemon_future.wait();
+        // turn daemon status to off
         m_status = false;
     }
 
     void ClockDaemon::m_daemon_process()
     {
         // empty process to be implemented by derivatives
+        while (m_status)
+        {
+            m_attached_container->set_text("00:00");
+            std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+        }
         return;
     }
 }

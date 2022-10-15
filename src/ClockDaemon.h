@@ -24,8 +24,7 @@ namespace Xcurse
         static std::unordered_set<ClockContainer *> m_registered_containers;
         ClockContainer *m_attached_container;
         virtual void m_daemon_process();
-
-    private:
+        std::future<void> m_daemon_future;
         std::atomic_bool m_status;
     };
 }
