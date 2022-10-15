@@ -12,6 +12,7 @@ namespace Xcurse
     {
     public:
         ClockDaemon();
+        ClockDaemon(ClockContainer *container);
 
         bool attach(ClockContainer *container);
         bool detach();
@@ -25,6 +26,6 @@ namespace Xcurse
         ClockContainer *m_attached_container;
         virtual void m_daemon_process();
         std::future<void> m_daemon_future;
-        std::atomic_bool m_status;
+        std::atomic_bool m_daemon_status;
     };
 }

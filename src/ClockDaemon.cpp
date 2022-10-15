@@ -5,7 +5,12 @@ namespace Xcurse
     // init static set
     std::unordered_set<ClockContainer *> ClockDaemon::m_registered_containers{};
 
-    ClockDaemon::ClockDaemon() : m_status(false) {}
+    ClockDaemon::ClockDaemon() : m_daemon_status(false) {}
+
+    ClockDaemon::ClockDaemon(ClockContainer *container) : m_daemon_status(false)
+    {
+        attach(container);
+    }
 
     bool ClockDaemon::attach(ClockContainer *container)
     {
@@ -52,28 +57,28 @@ namespace Xcurse
     void ClockDaemon::start()
     {
         // turn daemon status to on
-        m_status = true;
+        m_daemon_status = true;
         // launch daemon thread on future
         m_daemon_future = std::async(std::launch::async, &ClockDaemon::m_daemon_process, this);
     }
 
     bool ClockDaemon::running() const
     {
-        return m_status;
+        return m_daemon_status;
     }
 
     void ClockDaemon::stop()
     {
+        // turn daemon status to off
+        m_daemon_status = false;
         // wait for daemon thread to return
         m_daemon_future.wait();
-        // turn daemon status to off
-        m_status = false;
     }
 
     void ClockDaemon::m_daemon_process()
     {
         // empty process to be implemented by derivatives
-        while (m_status)
+        while (m_daemon_status)
         {
             m_attached_container->set_text("00:00");
             std::this_thread::sleep_for(std::chrono::milliseconds(1000));

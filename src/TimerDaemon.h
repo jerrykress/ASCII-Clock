@@ -6,6 +6,7 @@ namespace Xcurse
     {
     public:
         TimerDaemon();
+        TimerDaemon(ClockContainer *container);
 
         void set_timer(int t);
         void start_timer();
