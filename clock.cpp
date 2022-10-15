@@ -25,7 +25,7 @@ int main()
     {
         container->set_text(std::to_string(progress));
         std::this_thread::sleep_for(1s);
-        container->set_progress(progress -= 10);
+        container->set_progress(progress--);
     }
 
     d.power_off();
