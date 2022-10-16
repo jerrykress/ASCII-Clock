@@ -1,7 +1,7 @@
-#include "src/ClockContainer.h"
-#include "src/TimerDaemon.h"
-#include "src/ChronoDaemon.h"
-#include "src/FontLib.h"
+#include "ClockContainer.h"
+#include "../Daemon/TimerDaemon.h"
+#include "../Daemon/ChronoDaemon.h"
+#include "../Font/FontLib.h"
 
 using namespace Xcurse;
 using namespace std::literals::chrono_literals;

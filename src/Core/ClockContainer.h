@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../Xcurse/src/Display/Display.h"
-#include "ClockBackground.h"
-#include "FontAdaptor.h"
+#include "../../Xcurse/src/Display/Display.h"
+#include "../Background/ClockBackground.h"
+#include "../Font/FontAdaptor.h"
 
 namespace Xcurse
 {

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../Xcurse/src/Display/Display.h"
-#include "../Xcurse/src/Utils/Converter.h"
+#include "../../Xcurse/src/Display/Display.h"
+#include "../../Xcurse/src/Utils/Converter.h"
 #include "FontLib.h"
 #include <numeric>
 

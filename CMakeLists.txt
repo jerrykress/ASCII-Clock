@@ -14,10 +14,13 @@ file(GLOB src_files CONFIGURE_DEPENDS
      "Xcurse/src/Widgets/*.cpp"
      "Xcurse/src/Window/*.cpp"
      "Xcurse/src/Shapes/*.cpp"
-     "src/*.cpp"
+     "src/Background/*.cpp"
+     "src/Daemon/*.cpp"
+     "src/Font/*.cpp"
+     "src/Core/*.cpp"
 )
 
-add_executable(Clock clock.cpp ${src_files})
+add_executable(Clock src/Core/Clock.cpp ${src_files})
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
