@@ -12,7 +12,7 @@ namespace Xcurse
         attach(container);
     }
 
-    bool ClockDaemon::attach(ClockContainer *container)
+    bool ClockDaemon::attach(ClockContainer *container, ClockDaemon::launch_policy policy)
     {
         // check if container is already attached to another daemon
         if (!ClockDaemon::m_registered_containers.count(container))
@@ -20,6 +20,11 @@ namespace Xcurse
             // attach to this daemon and add to registry
             m_attached_container = container;
             ClockDaemon::m_registered_containers.emplace(container);
+            // if launch policy is now, start daemon
+            if (policy == now)
+            {
+                start();
+            }
             return true;
         }
         return false;
@@ -38,10 +43,10 @@ namespace Xcurse
         return false;
     }
 
-    bool ClockDaemon::replace_with(ClockDaemon *daemon)
+    ClockDaemon *ClockDaemon::replace_with(ClockDaemon *daemon, ClockDaemon::launch_policy policy)
     {
-        // if it's not the same daemon
-        if (this != daemon)
+        // if new daemon is not the same as curr and curr is the daemon in use
+        if (this != daemon && running())
         {
             // make copy of the container ptr
             auto container_ptr = m_attached_container;
@@ -49,9 +54,19 @@ namespace Xcurse
             stop();
             detach();
             // attach container to new daemon
-            return daemon->attach(container_ptr);
+            if (daemon->attach(container_ptr))
+            {
+                // if launch policy is now, start new daemon
+                if (policy == now)
+                {
+                    daemon->start();
+                }
+                // if replacement ok, return new daemon ptr
+                return daemon;
+            }
         }
-        return false;
+        // if replacement failed, return curr daemon ptr
+        return this;
     }
 
     void ClockDaemon::start()

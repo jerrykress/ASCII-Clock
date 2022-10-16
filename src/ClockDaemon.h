@@ -11,12 +11,18 @@ namespace Xcurse
     class ClockDaemon
     {
     public:
+        enum launch_policy
+        {
+            now,
+            deferred
+        };
+
         ClockDaemon();
         ClockDaemon(ClockContainer *container);
 
-        bool attach(ClockContainer *container);
+        bool attach(ClockContainer *container, ClockDaemon::launch_policy policy = ClockDaemon::launch_policy::deferred);
         bool detach();
-        bool replace_with(ClockDaemon *daemon);
+        ClockDaemon *replace_with(ClockDaemon *daemon, ClockDaemon::launch_policy policy = ClockDaemon::launch_policy::now);
         void start();
         bool running() const;
         void stop();
