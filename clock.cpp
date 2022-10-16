@@ -26,19 +26,18 @@ int main(int argc, char **argv)
     // daemon->set_timer(std::stoi(argv[1]));
     // daemon->start();
 
-    // d.add_obj("root", "clock", container);
-    // d.map_key_action('x', [&]()
-    //                  { daemon->stop(); });
+    ChronoDaemon *daemon = new ChronoDaemon(container);
+    daemon->start();
+
+    d.add_obj("root", "clock", container);
+    d.map_key_action('x', [&]()
+                     { daemon->stop(); });
     // d.map_key_action('s', [&]()
     //                  { daemon->start_timer(); });
     // d.map_key_action('p', [&]()
     //                  { daemon->pause_timer(); });
     // d.map_key_action('r', [&]()
     //                  { daemon->reset_timer(); });
-
-    ChronoDaemon *daemon = new ChronoDaemon(container);
-    daemon->start();
-    d.add_obj("root", "chrono", container);
 
     d.power_on();
 
