@@ -9,6 +9,8 @@ namespace Xcurse
         TimerDaemon(ClockContainer *container);
 
         void set_timer(int t);
+        void inc_timer();
+        void dec_timer();
         void start_timer();
         void pause_timer();
         void reset_timer();
@@ -20,6 +22,7 @@ namespace Xcurse
         int m_set_time;
         int m_time_remain;
 
-        std::atomic_bool m_timer_status;
+        std::atomic_bool m_timer_running;
+        std::atomic_bool m_timer_active;
     };
 }

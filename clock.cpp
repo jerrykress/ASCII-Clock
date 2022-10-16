@@ -8,11 +8,6 @@ using namespace std::literals::chrono_literals;
 
 int main(int argc, char **argv)
 {
-    if (argc < 2)
-    {
-        return 0;
-    }
-
     static bool prog_exit = false;
 
     Display &d = *Display::get_display();
@@ -26,7 +21,7 @@ int main(int argc, char **argv)
     ClockContainer *container = new ClockContainer(FontAdaptor(digit_bold), ClockBackground());
 
     TimerDaemon *timer_daemon = new TimerDaemon();
-    timer_daemon->set_timer(std::stoi(argv[1]));
+    timer_daemon->set_timer(60);
 
     ChronoDaemon *chrono_daemon = new ChronoDaemon();
 
@@ -41,6 +36,10 @@ int main(int argc, char **argv)
                      { if(sel_daemon==timer_daemon) timer_daemon->pause_timer(); });
     d.map_key_action('r', [&]()
                      { if(sel_daemon==timer_daemon) timer_daemon->reset_timer(); });
+    d.map_key_action(',', [&]()
+                     { if(sel_daemon==timer_daemon) timer_daemon->dec_timer(); });
+    d.map_key_action('.', [&]()
+                     { if(sel_daemon==timer_daemon) timer_daemon->inc_timer(); });
     d.map_key_action('c', [&]()
                      { sel_daemon = sel_daemon->replace_with(chrono_daemon); });
     d.map_key_action('t', [&]()
