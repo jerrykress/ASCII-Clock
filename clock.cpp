@@ -1,5 +1,6 @@
 #include "src/ClockContainer.h"
 #include "src/TimerDaemon.h"
+#include "src/ChronoDaemon.h"
 #include "src/FontLib.h"
 
 using namespace Xcurse;
@@ -7,6 +8,11 @@ using namespace std::literals::chrono_literals;
 
 int main(int argc, char **argv)
 {
+    if (argc < 2)
+    {
+        return 0;
+    }
+
     Display &d = *Display::get_display();
     d.init();
     d.set_io_mouse(false);
@@ -16,19 +22,25 @@ int main(int argc, char **argv)
     d.set_refresh_interval(200);
 
     ClockContainer *container = new ClockContainer(FontAdaptor(digit_bold), ClockBackground());
-    TimerDaemon *daemon = new TimerDaemon(container);
+    // TimerDaemon *daemon = new TimerDaemon(container);
+    // daemon->set_timer(std::stoi(argv[1]));
+    // daemon->start();
 
-    d.add_obj("root", "clock", container);
-    d.map_key_action('x', [&]()
-                     { daemon->stop(); });
-    d.map_key_action('s', [&]()
-                     { daemon->start_timer(); });
-    d.map_key_action('p', [&]()
-                     { daemon->pause_timer(); });
+    // d.add_obj("root", "clock", container);
+    // d.map_key_action('x', [&]()
+    //                  { daemon->stop(); });
+    // d.map_key_action('s', [&]()
+    //                  { daemon->start_timer(); });
+    // d.map_key_action('p', [&]()
+    //                  { daemon->pause_timer(); });
+    // d.map_key_action('r', [&]()
+    //                  { daemon->reset_timer(); });
+
+    ChronoDaemon *daemon = new ChronoDaemon(container);
+    daemon->start();
+    d.add_obj("root", "chrono", container);
 
     d.power_on();
-    daemon->set_timer(15);
-    daemon->start();
 
     while (d.has_power() && daemon->running())
     {
