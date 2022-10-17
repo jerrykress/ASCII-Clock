@@ -26,7 +26,7 @@ int main(int argc, char **argv)
     /*
         Setup Components
     */
-    ClockContainer *container = new ClockContainer(new FontAdaptor(digit_bold), new HorizontalBackground());
+    ClockContainer *container = new ClockContainer(new FontAdaptor(digit_bold), new HMiddleOutBackground());
     TimerDaemon *timer_daemon = new TimerDaemon();
     timer_daemon->set_timer(argc > 1 ? std::stoi(argv[1]) * 60 : 60);
     ChronoDaemon *chrono_daemon = new ChronoDaemon();
