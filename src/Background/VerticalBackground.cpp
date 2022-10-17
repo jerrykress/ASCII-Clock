@@ -12,14 +12,11 @@ namespace Xcurse
 
         const int start_y = m_size.height * (100 - m_percentage) / 100;
 
-        for (int y = 0; y < m_size.height; y++)
+        for (int y = start_y; y < m_size.height; y++)
         {
-            if (y >= start_y)
+            for (int x = 0; x < m_size.width; x++)
             {
-                for (int x = 0; x < m_size.width; x++)
-                {
-                    m_display_ptr->set_pixel(this, x, y, decorator);
-                }
+                m_display_ptr->set_pixel(this, x, y, decorator);
             }
         }
     }

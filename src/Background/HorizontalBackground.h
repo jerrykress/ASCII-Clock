@@ -4,10 +4,10 @@
 
 namespace Xcurse
 {
-    class VerticalBackground : public ClockBackground
+    class HorizontalBackground : public ClockBackground
     {
     public:
-        VerticalBackground();
+        HorizontalBackground();
 
     protected:
         void draw() override;

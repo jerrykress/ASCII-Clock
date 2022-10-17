@@ -1,3 +1,5 @@
+#pragma once
+
 #include "ClockDaemon.h"
 
 namespace Xcurse
