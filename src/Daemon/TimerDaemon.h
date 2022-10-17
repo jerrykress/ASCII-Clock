@@ -11,8 +11,7 @@ namespace Xcurse
         TimerDaemon(ClockContainer *container);
 
         void set_timer(int t);
-        void inc_timer();
-        void dec_timer();
+        void change_timer(int offset);
         void start_timer();
         void pause_timer();
         void reset_timer();

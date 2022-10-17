@@ -2,9 +2,9 @@
 
 namespace Xcurse
 {
-    TimerDaemon::TimerDaemon() : m_time_remain(0), m_set_time(0), m_timer_running(false) {}
+    TimerDaemon::TimerDaemon() : m_time_remain(0), m_set_time(0), m_timer_running(false), m_timer_active(false) {}
 
-    TimerDaemon::TimerDaemon(ClockContainer *container) : m_time_remain(0), m_set_time(0), m_timer_running(false)
+    TimerDaemon::TimerDaemon(ClockContainer *container) : m_time_remain(0), m_set_time(0), m_timer_running(false), m_timer_active(false)
     {
         attach(container);
     }
@@ -18,14 +18,9 @@ namespace Xcurse
         }
     }
 
-    void TimerDaemon::inc_timer()
+    void TimerDaemon::change_timer(int offset)
     {
-        set_timer(m_set_time + 60);
-    }
-
-    void TimerDaemon::dec_timer()
-    {
-        set_timer(std::max(60, m_set_time - 60));
+        set_timer(std::max(60, m_set_time + offset));
     }
 
     void TimerDaemon::start_timer()
