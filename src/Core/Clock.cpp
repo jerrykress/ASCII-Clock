@@ -2,7 +2,7 @@
 #include "../include/daemon.h"
 #include "../include/background.h"
 #include "../include/font.h"
-#include "../../Xcurse/src/Widgets/TextField.h"
+#include "../../Xcurse/src/Xcurse.h"
 
 using namespace Xcurse;
 using namespace std::literals::chrono_literals;
@@ -26,6 +26,23 @@ int main(int argc, char **argv)
     /*
         Setup Components
     */
+    const std::vector<std::wstring> key_bindings{
+        L"   KEY BINDINGS   ",
+        L"                  ",
+        L"[KEY]     [ACTION]",
+        L"                  ",
+        L"C            Clock",
+        L"T            Timer",
+        L"S      Start Timer",
+        L"P      Pause Timer",
+        L"R      Reset Timer",
+        L"<      -1min Timer",
+        L">      +1min Timer",
+        L";       Prev style",
+        L".       Next style",
+        L"H     Toggle Hints",
+        L"?      Toggle Help"};
+
     ClockContainer *container = new ClockContainer(
         std::vector<FontAdaptor *>{
             new FontAdaptor(digit_bold)},
@@ -37,15 +54,18 @@ int main(int argc, char **argv)
     timer_daemon->set_timer(argc > 1 ? std::stoi(argv[1]) * 60 : 60);
     ChronoDaemon *chrono_daemon = new ChronoDaemon();
     ClockDaemon *active_daemon = chrono_daemon;
-    TextField *titlebar = new TextField("title", "Clock");
-    TextField *bottombar = new TextField("tips", "[C]Clock [T]Timer [S]Start [P]Pause [R]Reset [,]-1min [.]+1min [X]Quit [H]Hide");
+    TextField *titlebar = new TextField("", "Clock");
+    TextField *bottombar = new TextField("", "[C/T]Mode [X]Quit [?]Help");
+    MultiTextField *help_page = new MultiTextField("", key_bindings, 1, ALIGN_CENTER);
+    help_page->set_visible();
 
     /*
         Build interface
     */
     d.add_obj("root", "title", titlebar);
     d.add_obj("root", "clock", container);
-    d.add_obj("root", "tips", bottombar);
+    d.add_obj("root", "keybinds", help_page);
+    d.add_obj("root", "hints", bottombar);
 
     /*
         Add keymaps
@@ -54,6 +74,8 @@ int main(int argc, char **argv)
                      { prog_exit = true; });
     d.map_key_action('h', [&]()
                      { bottombar->set_visible(); });
+    d.map_key_action('?', [&]()
+                     { help_page->set_visible(); container->set_visible(); });
     d.map_key_action(';', [&]()
                      { container->change_background(-1); });
     d.map_key_action('\'', [&]()
