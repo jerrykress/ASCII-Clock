@@ -1,7 +1,7 @@
 #include "ClockContainer.h"
-#include "../Daemon/TimerDaemon.h"
-#include "../Daemon/ChronoDaemon.h"
-#include "../Font/FontLib.h"
+#include "../include/daemon.h"
+#include "../include/background.h"
+#include "../include/font.h"
 #include "../../Xcurse/src/Widgets/TextField.h"
 
 using namespace Xcurse;
@@ -26,7 +26,7 @@ int main(int argc, char **argv)
     /*
         Setup Components
     */
-    ClockContainer *container = new ClockContainer(FontAdaptor(digit_bold), ClockBackground());
+    ClockContainer *container = new ClockContainer(new FontAdaptor(digit_bold), new VerticalBackground());
     TimerDaemon *timer_daemon = new TimerDaemon();
     timer_daemon->set_timer(argc > 1 ? std::stoi(argv[1]) * 60 : 60);
     ChronoDaemon *chrono_daemon = new ChronoDaemon();

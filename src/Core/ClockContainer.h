@@ -9,7 +9,7 @@ namespace Xcurse
     class ClockContainer : public BaseDisplayObject
     {
     public:
-        ClockContainer(const FontAdaptor &adaptor, const ClockBackground &background);
+        ClockContainer(FontAdaptor *adaptor, ClockBackground *background);
 
         void set_text(const std::string &s);
         void set_progress(int i);
@@ -17,7 +17,7 @@ namespace Xcurse
     private:
         void draw() override;
 
-        FontAdaptor m_adaptor;
-        ClockBackground m_background;
+        FontAdaptor *m_adaptor;
+        ClockBackground *m_background;
     };
 }
