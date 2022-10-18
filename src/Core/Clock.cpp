@@ -26,6 +26,8 @@ int main(int argc, char **argv)
     /*
         Setup Components
     */
+
+    // Keybind Text
     const std::vector<std::wstring> key_bindings{
         L"   KEY BINDINGS   ",
         L"                  ",
@@ -43,6 +45,7 @@ int main(int argc, char **argv)
         L"H     Toggle Hints",
         L"?      Toggle Help"};
 
+    // Clock Container
     ClockContainer *container = new ClockContainer(
         std::vector<FontAdaptor *>{
             new FontAdaptor(digit_bold)},
@@ -50,22 +53,26 @@ int main(int argc, char **argv)
             new VerticalBackground(),
             new HorizontalBackground(),
             new HMiddleOutBackground()});
+
+    // Clock Daemons
     TimerDaemon *timer_daemon = new TimerDaemon();
     timer_daemon->set_timer(argc > 1 ? std::stoi(argv[1]) * 60 : 60);
     ChronoDaemon *chrono_daemon = new ChronoDaemon();
     ClockDaemon *active_daemon = chrono_daemon;
-    TextField *titlebar = new TextField("", "Clock");
-    TextField *bottombar = new TextField("", "[C/T]Mode [X]Quit [?]Help");
-    MultiTextField *help_page = new MultiTextField("", key_bindings, 1, ALIGN_CENTER);
-    help_page->set_visible();
+
+    // Text Modules
+    TextField *title_field = new TextField("Clock");
+    TextField *hints_field = new TextField("[C/T]Mode [X]Quit [?]Help");
+    MultiTextField *keybind_page = new MultiTextField(key_bindings, 1, ALIGN_CENTER);
+    keybind_page->set_visible();
 
     /*
         Build interface
     */
-    d.add_obj("root", "title", titlebar);
+    d.add_obj("root", "title", title_field);
     d.add_obj("root", "clock", container);
-    d.add_obj("root", "keybinds", help_page);
-    d.add_obj("root", "hints", bottombar);
+    d.add_obj("root", "keybinds", keybind_page);
+    d.add_obj("root", "hints", hints_field);
 
     /*
         Add keymaps
@@ -73,9 +80,9 @@ int main(int argc, char **argv)
     d.map_key_action('x', [&]()
                      { prog_exit = true; });
     d.map_key_action('h', [&]()
-                     { bottombar->set_visible(); });
+                     { hints_field->set_visible(); });
     d.map_key_action('?', [&]()
-                     { help_page->set_visible(); container->set_visible(); });
+                     { keybind_page->set_visible(); container->set_visible(); });
     d.map_key_action(';', [&]()
                      { container->change_background(-1); });
     d.map_key_action('\'', [&]()
@@ -95,9 +102,9 @@ int main(int argc, char **argv)
     d.map_key_action('.', [&]()
                      { if(active_daemon == timer_daemon) timer_daemon->change_timer(60); });
     d.map_key_action('c', [&]()
-                     { active_daemon = active_daemon->replace_with(chrono_daemon); titlebar->set_data(L"Clock"); });
+                     { active_daemon = active_daemon->replace_with(chrono_daemon); title_field->set_data(L"Clock"); });
     d.map_key_action('t', [&]()
-                     { active_daemon = active_daemon->replace_with(timer_daemon); titlebar->set_data(L"Timer"); });
+                     { active_daemon = active_daemon->replace_with(timer_daemon); title_field->set_data(L"Timer"); });
 
     /*
         Program runtime
@@ -105,9 +112,9 @@ int main(int argc, char **argv)
     d.power_on();
     active_daemon->attach(container, ClockDaemon::launch_policy::now);
 
+    // idle work
     while (!prog_exit)
     {
-        // idle work
         std::this_thread::sleep_for(200ms);
     }
 
