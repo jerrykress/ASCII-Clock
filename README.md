@@ -2,14 +2,23 @@
 
 Using minimal Linux but wants to use a timer? Launch a countdown in the terminal. Yet another TUI clock/timer.
 
+Keybindings are configurable and multiple font and background styles available at runtime.
+
 ![alt text](https://github.com/jerrykress/ASCII-Clock/blob/main/Screenshot.png?raw=true)
 
-## Requirement
+## Install Script
 
-**Xcurse Library**
+Change permission and run the auto install script, output binary will be called Clock.
 
 ```
-# Clone from my repo for the latest version
+./install.sh
+```
+
+## Manual Install
+
+Clone the TUI library from other project repo
+
+```
 git clone https://github.com/jerrykress/Xcurse
 ```
 
