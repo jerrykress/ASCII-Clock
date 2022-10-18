@@ -31,8 +31,6 @@ int main(int argc, char **argv)
     const std::vector<std::wstring> key_bindings{
         L"   KEY BINDINGS   ",
         L"                  ",
-        L"[KEY]     [ACTION]",
-        L"                  ",
         L"C            Clock",
         L"T            Timer",
         L"S      Start Timer",
@@ -42,6 +40,8 @@ int main(int argc, char **argv)
         L">      +1min Timer",
         L";       Prev style",
         L".       Next style",
+        L"-        Prev font",
+        L"+        Next font",
         L"H     Toggle Hints",
         L"?      Toggle Help"};
 
