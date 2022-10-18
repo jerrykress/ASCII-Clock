@@ -42,6 +42,8 @@ int main(int argc, char **argv)
         L">      +1min Timer",
         L";       Prev style",
         L".       Next style",
+        L"[        Prev font",
+        L"]        Next font",
         L"H     Toggle Hints",
         L"?      Toggle Help"};
 
@@ -87,9 +89,9 @@ int main(int argc, char **argv)
                      { container->change_background(-1); });
     d.map_key_action('\'', [&]()
                      { container->change_background(1); });
-    d.map_key_action('-', [&]()
+    d.map_key_action('[', [&]()
                      { container->change_adaptor(-1); });
-    d.map_key_action('+', [&]()
+    d.map_key_action(']', [&]()
                      { container->change_adaptor(1); });
     d.map_key_action('s', [&]()
                      { if(active_daemon == timer_daemon) timer_daemon->start_timer(); });
