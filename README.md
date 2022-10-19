@@ -6,12 +6,18 @@ Keybindings are configurable and multiple font and background styles available a
 
 ![alt text](https://github.com/jerrykress/ASCII-Clock/blob/main/Screenshot.png?raw=true)
 
-## Install Script
+## Install with command
+
+```
+git clone https://github.com/jerrykress/ASCII-Clock && cd ASCII-Clock  && git clone https://github.com/jerrykress/Xcurse && mkdir build && cd build && cmake .. && make
+```
+
+## Install with script
 
 Change permission and run the auto install script, output binary will be called Clock.
 
 ```
-./install.sh
+chmod +x install.sh && ./install.sh
 ```
 
 ## Manual Install
