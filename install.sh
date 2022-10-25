@@ -9,3 +9,6 @@ cmake ..
 
 # compile all
 make
+
+echo "Build success! Run ./Clock to start!"
+echo "For more information please read the git repo page: https://github.com/jerrykress/ASCII-Clock."

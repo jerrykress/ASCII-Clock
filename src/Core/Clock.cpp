@@ -40,15 +40,16 @@ int main(int argc, char **argv)
         L">      +1min Timer",
         L";       Prev style",
         L".       Next style",
-        L"-        Prev font",
-        L"+        Next font",
+        L"[        Prev font",
+        L"]        Next font",
         L"H     Toggle Hints",
         L"?      Toggle Help"};
 
     // Clock Container
     ClockContainer *container = new ClockContainer(
         std::vector<FontAdaptor *>{
-            new FontAdaptor(digit_bold)},
+            new FontAdaptor(font_3d_diagonal),
+            new FontAdaptor(font_varsity)},
         std::vector<ClockBackground *>{
             new VerticalBackground(),
             new HorizontalBackground(),
@@ -60,11 +61,12 @@ int main(int argc, char **argv)
     ChronoDaemon *chrono_daemon = new ChronoDaemon();
     ClockDaemon *active_daemon = chrono_daemon;
 
+    std::cout << "daemon setup done\n ";
     // Text Modules
     TextField *title_field = new TextField("Clock");
     TextField *hints_field = new TextField("[C/T]Mode [X]Quit [?]Help");
     MultiTextField *keybind_page = new MultiTextField(key_bindings, 1, ALIGN_CENTER);
-    keybind_page->set_visible();
+    keybind_page->set_visible(false);
 
     /*
         Build interface
@@ -74,6 +76,7 @@ int main(int argc, char **argv)
     d.add_obj("root", "keybinds", keybind_page);
     d.add_obj("root", "hints", hints_field);
 
+    std::cout << "interface setup done\n ";
     /*
         Add keymaps
     */
