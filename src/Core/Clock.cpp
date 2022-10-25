@@ -61,7 +61,6 @@ int main(int argc, char **argv)
     ChronoDaemon *chrono_daemon = new ChronoDaemon();
     ClockDaemon *active_daemon = chrono_daemon;
 
-    std::cout << "daemon setup done\n ";
     // Text Modules
     TextField *title_field = new TextField("Clock");
     TextField *hints_field = new TextField("[C/T]Mode [X]Quit [?]Help");
@@ -76,7 +75,6 @@ int main(int argc, char **argv)
     d.add_obj("root", "keybinds", keybind_page);
     d.add_obj("root", "hints", hints_field);
 
-    std::cout << "interface setup done\n ";
     /*
         Add keymaps
     */
