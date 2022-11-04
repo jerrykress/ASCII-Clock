@@ -5,7 +5,7 @@ git clone https://github.com/jerrykress/Xcurse
 mkdir build && cd build
 
 # run cmake
-cmake ..
+cmake -DCMAKE_BUILD_TYPE=Release ..
 
 # compile all
 make

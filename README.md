@@ -9,7 +9,7 @@ Keybindings are configurable and multiple font and background styles available a
 ## Install with command
 
 ```
-git clone https://github.com/jerrykress/ASCII-Clock && cd ASCII-Clock  && git clone https://github.com/jerrykress/Xcurse && mkdir build && cd build && cmake .. && make
+git clone https://github.com/jerrykress/ASCII-Clock && cd ASCII-Clock && git clone https://github.com/jerrykress/Xcurse && mkdir build && cd build && cmake -DCMAKE_BUILD_TYPE=Release .. && make
 ```
 
 ## Install with script
