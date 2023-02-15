@@ -11,9 +11,9 @@ namespace Xcurse
         ClockBackground(const ClockBackground &that);
         ClockBackground &operator=(ClockBackground &that);
 
-        void set_percentage(int i);
-        void set_decorator_symbol(wchar_t c);
-        void set_decorator_style(const Stylable &s);
+        void set_percentage(int i);                  // set percentage of the background
+        void set_decorator_symbol(wchar_t c);        // change the decorator used for the background
+        void set_decorator_style(const Stylable &s); // set the style using a Style object for the background
 
     protected:
         void draw() override;
